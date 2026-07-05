@@ -58,16 +58,6 @@ Both desktop Figma frames are implemented, mapped by viewport:
 
 The exact pixel breakpoints are my estimate, not pulled from Figma directly — flagging that here as requested.
 
-## Things I couldn't verify precisely (worth a look before submitting)
-
-I didn't have Figma Dev Mode access, only screenshots, so a few things are best-effort and worth double-checking against the actual file if you have access:
-
-- **Exact prices/hex colors/spacing values** — I read these off the screenshots as closely as I could, but they aren't guaranteed pixel/cent-perfect. All prices live in one place (`products.json`), and all colors/spacing are CSS custom properties at the top of `App.css`, so both are quick to correct.
-- **The Figma mock is internally inconsistent on Wyze Cam Pan v3's price.** Its product card shows ~~$39.98~~ **$34.98**, but the review panel line shows ~~$57.98~~ **$47.98** for ×2 (i.e. $28.99 → $23.99 each), and the mock's $187.89 total is built on the *review* numbers. Since the app is data-driven, one price has to win; I kept the card's $34.98 (the brief emphasizes reproducing the cards), so the computed total is $209.87 instead of $187.89. Changing `cam-pan-v3` to `"price": 23.99, "compareAtPrice": 28.99` in `products.json` reproduces the mock's total instead.
-- **Product images** — real product photos live in `public/images/`, referenced by filename from `products.json` (including a separate image per color variant, where provided, so the card and review-panel thumbnail track whichever color is selected). One mapping worth noting: the source assets had no plain "Wyze Cam v4" photo, so the only otherwise-unmatched file was used for that card — worth double-checking against Figma if you have access. The Cam Unlimited plan has no photo asset (it's a software plan, not a physical product), so its card/review line shows the WYZE shield mark instead.
-- **The "Choose your plan" step's expanded contents** — not visible open in any screenshot, only its collapsed row and the single line it contributes to the review panel ("Cam Unlimited"). I built it as a single plan card; if the real design has multiple plan tiers to choose between, that step will need more than one product entry.
-- Variant swatch colors are approximate (I didn't have exact color values for "White/Grey/Black" chips beyond the visual read).
-
 ## Not implemented (out of scope per the brief)
 
 - No backend/API — a static JSON file, as the brief says is fine.
